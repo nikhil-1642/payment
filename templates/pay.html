@@ -1,11 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Scan to Pay</title>
+    <title>Scan & Pay</title>
+    <meta charset="UTF-8">
+    <script>
+        function openUPI() {
+            const upiLink = document.getElementById("upiLink").href;
+            window.location.href = upiLink;
+        }
+
+        window.onload = function () {
+            setTimeout(openUPI, 3000); // auto-launch after 3s
+        };
+    </script>
 </head>
 <body>
     <h2>Pay ₹{{ amount }} to {{ name }}</h2>
-    <p>Scan the QR code using your UPI app</p>
-    <img src="{{ qr_path }}" alt="UPI QR Code" width="300">
+    <p>Scan this QR code or tap below:</p>
+    <img src="{{ qr_path }}" alt="QR Code" width="250"><br><br>
+
+    <a id="upiLink" href="{{ upi_url }}">
+        <button style="padding: 10px 20px; font-size: 16px;">Tap to Pay via UPI</button>
+    </a>
 </body>
 </html>
