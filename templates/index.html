@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pay via PhonePe</title>
+    <script>
+        function payNow() {
+            const amount = document.getElementById('amount').value;
+            if (!amount || parseFloat(amount) <= 0) {
+                alert("Please enter a valid amount.");
+                return;
+            }
+
+            const upiId = "9390286430@ibl";
+            const name = "Nikhil";
+            const note = "Payment via UPI";
+
+            const upiUrl = `upi://pay?pa=${upiId}&pn=${name}&am=${amount}&cu=INR&tn=${note}`;
+
+            // Redirect to UPI payment intent
+            window.location.href = upiUrl;
+        }
+    </script>
+</head>
+<body>
+    <h2>Send Money to Nikhil</h2>
+    <label>Enter Amount (INR):</label>
+    <input type="number" id="amount" step="0.01" required>
+    <button onclick="payNow()">Pay with PhonePe</button>
+</body>
+</html>
