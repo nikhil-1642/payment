@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, send_file
+from flask import Flask, render_template, request
 import qrcode
 import os
 
@@ -17,12 +17,15 @@ def index():
 
         upi_url = f"upi://pay?pa={upi_id}&pn={name}&am={amount}&cu=INR&tn={note}"
 
+        # Make sure static folder exists
+        os.makedirs("static", exist_ok=True)
+
         # Generate QR code
         qr = qrcode.make(upi_url)
         qr_path = os.path.join("static", "qr.png")
         qr.save(qr_path)
 
-        return render_template('pay.html', qr_path=qr_path, amount=amount, name=name)
+        return render_template('pay.html', qr_path=qr_path, amount=amount, name=name, upi_url=upi_url)
 
     return render_template('index.html')
 
